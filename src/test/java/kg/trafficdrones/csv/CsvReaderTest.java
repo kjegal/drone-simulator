@@ -1,5 +1,6 @@
 package kg.trafficdrones.csv;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
@@ -21,7 +22,8 @@ public class CsvReaderTest {
     private static final List<String> LINE_2 = Arrays.asList("1","2","3","4");
     private static final List<String> LINE_3 = Arrays.asList("x1","y2","z3","u4");
 
-    ExpectedException expectedException = ExpectedException.none();
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void readSuccessfully() throws Exception {
@@ -38,7 +40,7 @@ public class CsvReaderTest {
         expectedException.expectCause(isA(IOException.class));
         expectedException.expectMessage("Error loading 'unknown'");
 
-        new CsvReader("unknown");
+        new CsvReader("unknown").read();
     }
 
 }
